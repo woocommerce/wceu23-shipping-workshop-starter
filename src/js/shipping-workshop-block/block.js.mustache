@@ -18,7 +18,7 @@ import { options } from './options';
  * 📝 Using `getSetting` from `@woocommerce/settings` get the 'shipping-workshop_data' key, and store the defaultLabelText in a variable.
  * Update the hardcoded label text with the defaultLabelText variable.
  */
-const { defaultLabelText } = getSetting( 'shipping-workshop_data', '' );
+const shippingWorkshopSettings = getSetting( 'shipping-workshop_data', '' );
 
 export const Block = ( { checkoutExtensionData, extensions } ) => {
 	/**
