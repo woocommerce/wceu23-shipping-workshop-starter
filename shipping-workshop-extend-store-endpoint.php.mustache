@@ -1,0 +1,118 @@
+<?php
+use Automattic\WooCommerce\Blocks\Package;
+use Automattic\WooCommerce\Blocks\StoreApi\Schemas\CartSchema;
+use Automattic\WooCommerce\Blocks\StoreApi\Schemas\CheckoutSchema;
+
+/**
+ * Shipping Workshop Extend Store API.
+ */
+class Shipping_Workshop_Extend_Store_Endpoint {
+	/**
+	 * Stores Rest Extending instance.
+	 *
+	 * @var ExtendRestApi
+	 */
+	private static $extend;
+
+	/**
+	 * Plugin Identifier, unique to each plugin.
+	 *
+	 * @var string
+	 */
+	const IDENTIFIER = 'shipping-workshop';
+
+	/**
+	 * Bootstraps the class and hooks required data.
+	 *
+	 */
+	public static function init() {
+		if ( version_compare( Package::get_version(), '7.2.0', '>=' ) ) {
+			self::$extend = Automattic\WooCommerce\StoreApi\StoreApi::container()->get( Automattic\WooCommerce\StoreApi\Schemas\ExtendSchema::class );
+		} else {
+			self::$extend = Package::container()->get( ExtendRestApi::class );
+		}
+
+		self::extend_store();
+        self::register_update_callback();
+	}
+
+    public static function register_update_callback() {
+        self::$extend->register_update_callback(
+            array(
+                'namespace' => self::IDENTIFIER,
+                'callback'  => array(
+                    'Shipping_Workshop_Extend_Store_Endpoint',
+                    'handle_extension_cart_update'
+                )
+            )
+        );
+    }
+
+	public static function handle_extension_cart_update( $data ) {
+		// Do some processing in response to a client-side action.
+	}
+
+	/**
+	 * Registers the actual data into each endpoint.
+	 *
+	 */
+	public static function extend_store() {
+		/**
+		 * 📝 Write a new static function in this class, `extend_checkout_schema`.
+		 * This function should describe how the custom data will be formatted when submitting the checkout form.
+		 *
+		 * Once complete you can uncomment the code below. See the `extend_checkout_schema` function stub for more hints!
+		 */
+        /*
+		if ( is_callable( [ self::$extend, 'register_endpoint_data' ] ) ) {
+			self::$extend->register_endpoint_data(
+				array(
+					'endpoint'        => CheckoutSchema::IDENTIFIER,
+					'namespace'       => self::IDENTIFIER,
+					'schema_callback' => array( 'Shipping_Workshop_Extend_Store_Endpoint', 'extend_checkout_schema' ),
+					'schema_type'     => ARRAY_A,
+				)
+			);
+		}
+        */
+	}
+
+
+	/**
+	 * Register shipping workshop schema into the Checkout endpoint.
+	 *
+	 * @return array Registered schema.
+	 *
+	 */
+	public static function extend_checkout_schema() {
+		/**
+		 * 📝 Write code to extend the Checkout schema.
+		 *
+		 * We need to describe the shape of the data we're adding to the Checkout endpoint. Since we expect the shopper
+		 * to supply an option from the select box and MAYBE enter text into the "other" field, we need to describe two things.
+		 *
+		 * This function should return an array. The keys of this array should be the same as the keys we're adding data
+		 * to in the client using setExtensionData. Since we're adding two keys on the client, this function should
+		 * return an array with two keys.
+		 *
+		 * Each entry in the array should be an array describing the settings for this new field. The keys of this array
+		 * are:
+		 * 'description' 'type', 'context', 'readonly', and 'arg_options'.
+		 * - 'description' is a string describing the field.
+		 * - 'type' is the type of data we're expecting. For example, we might expect a string, or an array.
+		 * - 'context' is an array which describes which contexts this field should show up in. We want this field to
+		 *   show up in the `view` and `edit` contexts.
+		 * - 'readonly' is a boolean which describes whether this field can be edited later in the application
+		 *   lifecycle. In this case we do not want that, so we will set this to `false`.
+		 * - 'arg_options' is an array of options for this field. It is an array. We should add a key to this array
+		 *   called `validate_callback` which is a callback function that will be called when the data is submitted.
+		 *   This function should return a boolean. If it returns true, the data is valid. If it returns false, the data
+		 *   is invalid. We should also add a key called `sanitize_callback` which is a callback function that will clean the data.
+		 *   Let's ensure the data is clean since we'll be storing and displaying this to the admin! We can use the
+		 *   built-in sanitize_text_field function.
+		 *
+		 * This is tricky, so if you get stuck check `spoilers/extend-checkout-schema.md`
+		 */
+
+	}
+}
