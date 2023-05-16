@@ -37,7 +37,7 @@ export const Block = ( { checkoutExtensionData, extensions } ) => {
 		[ setExtensionData ]
 	);
 
-	const validationStoreKey = 'shipping-workshop-other-value';
+	const validationErrorId = 'shipping-workshop-other-value';
 
 	const { setValidationErrors, clearValidationError } = useDispatch(
 		'wc/store/validation'
@@ -52,6 +52,22 @@ export const Block = ( { checkoutExtensionData, extensions } ) => {
 		 * data store can be found here:
 		 * https://github.com/woocommerce/woocommerce-blocks/blob/trunk/docs/third-party-developers/extensibility/data-store/validation.md
 		 */
+
+		/**
+		 * 2. If the `selectedAlternateShippingInstruction` is not `other`, clear the validation error for the `shipping-workshop-other-value` field.
+		 * 3. If the `selectedAlternateShippingInstruction` is `other`, set the validation error for the `shipping-workshop-other-value` field.
+		 */
+
+		/**
+		 * 2. If the `otherShippingValue` is not empty, clear the validation error for the `shipping-workshop-other-value` field.
+		 * 3. If the `otherShippingValue` is empty, set the validation error for the `shipping-workshop-other-value` field.
+		 * 4. Ensure the `setExtensionData` function is not called multiple times. We can use the `debouncedSetExtensionData` function for this.
+		 */
+
+		/**
+		 * 💰Extra credit: In the `useEffect` that handles the "other" textarea, only call `clearValidationError` if the
+		 * validation error is in the data store already.
+		 */
 	} );
 	const [
 		selectedAlternateShippingInstruction,
@@ -62,41 +78,74 @@ export const Block = ( { checkoutExtensionData, extensions } ) => {
 	/* Handle changing the select's value */
 	useEffect( () => {
 		/**
-		 * 📝 Write some code in this useEffect that will run when the `selectedAlternateShippingInstruction` value changes.
-		 * This code should:
-		 * 1. Update the `alternateShippingInstruction` value in the `shipping-workshop` namespace of the checkout data store.
-		 * 2. If the `selectedAlternateShippingInstruction` is not `other`, clear the validation error for the `shipping-workshop-other-value` field.
-		 * 3. If the `selectedAlternateShippingInstruction` is `other`, set the validation error for the `shipping-workshop-other-value` field.
-		 * 4. Ensure the `setExtensionData` function is not called multiple times. We can use the `debouncedSetExtensionData` function for this.
-		 */
+         * 📝 Using `setExtensionData`, write some code in this useEffect that will run when the `selectedAlternateShippingInstruction` value changes.
+         *
+         * The API of this function is: setExtensionData( namespace, key, value )
+         *
+         * This code should use `setExtensionData` to update the `alternateShippingInstruction` key in the `shipping-workshop`
+         * namespace of the checkout data store.
+         */
 	}, [
-		clearValidationError,
-		setValidationErrors,
 		setExtensionData,
 		selectedAlternateShippingInstruction,
 	] );
+
+    /**
+     * 💰Extra credit: Use a `useState` to track whether the user has interacted with the "other" textbox. If they have,
+     * then the validation error should not be hidden when the user changes the select's value. If it is "pristine" then
+     * we should keep the error hidden.
+     */
 
 	/* Handle changing the "other" value */
 	useEffect( () => {
 		/**
 		 * 📝 Write some code in this useEffect that will run when the `otherShippingValue` value changes.
-		 * This code should:
-		 * 1. Update the `alternateShippingInstruction` value in the `shipping-workshop` namespace of the checkout data store.
-		 * 2. If the `otherShippingValue` is not empty, clear the validation error for the `shipping-workshop-other-value` field.
-		 * 3. If the `otherShippingValue` is empty, set the validation error for the `shipping-workshop-other-value` field.
-		 * 4. Ensure the `setExtensionData` function is not called multiple times. We can use the `debouncedSetExtensionData` function for this.
+		 * This code should use `setExtensionData` to update the `otherShippingValue` key in the `shipping-workshop`
+		 * namespace of the checkout data store.
+		 *
+		 * 💰 Extra credit: Ensure the `setExtensionData` function is not called multiple times. We can use the
+		 * `debouncedSetExtensionData` function for this. The API is the same.
 		 */
+
+		/**
+		 * 📝Write some code that will use `setValidationErrors` to add an entry to the validation data store if
+		 * `otherShippingValue` is empty.
+		 *
+		 * The API of this function is: `setValidationErrors( errors )`.
+		 *
+		 * `errors` is an object with the following shape:
+		 * {
+		 *     [ validationErrorId ]: {
+		 *  		message: string,
+		 *	    	hidden: boolean,
+		 *     }
+		 * }
+		 *
+		 * For now, the error should remain hidden until the user has interacted with the field.
+		 *
+		 * 💡Don't forget to update the dependencies of the `useEffect` when you reference new functions/variables!
+		 *
+		 * ☝️If the `selectedAlternateShippingInstruction` is not `other` let's skip adding the validation error.
+		 */
+
+        /**
+         * 📝Update the above code so that it will use `clearValidationError` to remove the validation error from the
+         * data store if `selectedAlternateShippingInstruction` is not `other`, or if the `otherShippingValue` is not empty.
+         *
+         * The API of `clearValidationError` is: `clearValidationError( validationErrorId )`
+         *
+         * 💡Don't forget to update the dependencies of the `useEffect` when you reference new functions/variables!
+         */
 	}, [
-		selectedAlternateShippingInstruction,
-		validationError,
-		debouncedSetExtensionData,
 		otherShippingValue,
-		setValidationErrors,
-		clearValidationError,
+		setExtensionData,
 	] );
 
 	return (
 		<div className="wp-block-shipping-workshop-not-at-home">
+            { /**
+             * 📝 Go to options.js and add some new options to display in the SelectControl below.
+             */ }
 			<SelectControl
 				label={ __(
 					'If I am not at home please…',

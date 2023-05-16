@@ -2,7 +2,7 @@ The `extend_checkout_schema` function should look like this:
 
 ```php
 public static function extend_checkout_schema() {
-    return array[
+    return [
         'otherShippingValue'   => [
             'description' => __( 'User-provided instructions for courier', 'shipping-workshop' ),
             'type'        => 'string',

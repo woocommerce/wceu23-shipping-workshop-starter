@@ -1,7 +1,7 @@
 {
-	"name": "shipping-workshop",
+	"name": "wceu23-shipping-workshop",
 	"version": "0.1.0",
-	"author": "The WordPress Contributors",
+	"author": "Thomas Roberts and Niels Lange",
 	"license": "GPL-2.0-or-later",
 	"main": "index.js",
 	"scripts": {
