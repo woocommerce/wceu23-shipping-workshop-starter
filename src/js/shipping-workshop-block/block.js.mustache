@@ -47,22 +47,13 @@ export const Block = ( { checkoutExtensionData, extensions } ) => {
 		const store = select( 'wc/store/validation' );
 		/**
 		 * 📝 Write some code to get the validation error from the `wc/store/validation` data store.
+		 * Using the `getValidationError` selector on the `store` object, get the validation error.
 		 *
-		 * The `validationStoreKey` variable can be used to get the validation error. Documentation on the validation
+		 * The `validationErrorId` variable can be used to get the validation error. Documentation on the validation
 		 * data store can be found here:
 		 * https://github.com/woocommerce/woocommerce-blocks/blob/trunk/docs/third-party-developers/extensibility/data-store/validation.md
 		 */
 
-		/**
-		 * 2. If the `selectedAlternateShippingInstruction` is not `other`, clear the validation error for the `shipping-workshop-other-value` field.
-		 * 3. If the `selectedAlternateShippingInstruction` is `other`, set the validation error for the `shipping-workshop-other-value` field.
-		 */
-
-		/**
-		 * 2. If the `otherShippingValue` is not empty, clear the validation error for the `shipping-workshop-other-value` field.
-		 * 3. If the `otherShippingValue` is empty, set the validation error for the `shipping-workshop-other-value` field.
-		 * 4. Ensure the `setExtensionData` function is not called multiple times. We can use the `debouncedSetExtensionData` function for this.
-		 */
 
 		/**
 		 * 💰Extra credit: In the `useEffect` that handles the "other" textarea, only call `clearValidationError` if the

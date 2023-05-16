@@ -51,7 +51,7 @@ define( 'Shipping_Workshop_VERSION', '0.1.0' );
                 $shipping_workshop_request_data = $request['extensions'][$this->get_name()];
                 /**
                  * 📝From the `$shipping_workshop_request_data` array, get the `alternateShippingInstruction` and
-                 * `alternateShippingInstructionOtherText` entries. Store them in their own variables.
+                 * `otherShippingValue` entries. Store them in their own variables.
                  */
 
                 /**
@@ -108,15 +108,15 @@ define( 'Shipping_Workshop_VERSION', '0.1.0' );
 		$script_asset_path = dirname( __FILE__ ) . '/build/index.asset.php';
 		$script_asset      = file_exists( $script_asset_path )
 			? require $script_asset_path
-			: array(
-				'dependencies' => array(),
+			: [
+				'dependencies' => [],
 				'version'      => $this->get_file_version( $script_path ),
-			);
+			];
 
 		wp_enqueue_style(
 			'shipping-workshop-blocks-integration',
 			$style_url,
-			array(),
+			[],
 			$this->get_file_version( $style_path )
 		);
 
@@ -140,7 +140,7 @@ define( 'Shipping_Workshop_VERSION', '0.1.0' );
 	 * @return string[]
 	 */
 	public function get_script_handles() {
-		return array( 'shipping-workshop-blocks-integration', 'shipping-workshop-block-frontend' );
+		return [ 'shipping-workshop-blocks-integration', 'shipping-workshop-block-frontend' ];
 	}
 
 	/**
@@ -149,7 +149,7 @@ define( 'Shipping_Workshop_VERSION', '0.1.0' );
 	 * @return string[]
 	 */
 	public function get_editor_script_handles() {
-		return array( 'shipping-workshop-blocks-integration', 'shipping-workshop-block-editor' );
+		return [ 'shipping-workshop-blocks-integration', 'shipping-workshop-block-editor' ];
 	}
 
 	/**
@@ -158,14 +158,14 @@ define( 'Shipping_Workshop_VERSION', '0.1.0' );
 	 * @return array
 	 */
 	public function get_script_data() {
-		$data = array(
+		$data = [
 			'shipping-workshop-active'    => true,
 
 			/**
              * 📝 Add a key/value pair to the data array that will be available to the block on the client side.
              * It should be called defaultLabelText and the value should be the default text to display above the label
              */
-		);
+		];
 
 		return $data;
 
@@ -178,7 +178,7 @@ define( 'Shipping_Workshop_VERSION', '0.1.0' );
 		wp_enqueue_style(
 			'shipping-workshop-block',
 			$style_url,
-			array(),
+			[],
 			$this->get_file_version( $style_path )
 		);
 	}
@@ -189,10 +189,10 @@ define( 'Shipping_Workshop_VERSION', '0.1.0' );
 		$script_asset_path = dirname( __FILE__ ) . '/build/shipping-workshop-block.asset.php';
 		$script_asset      = file_exists( $script_asset_path )
 			? require $script_asset_path
-			: array(
-				'dependencies' => array(),
+			: [
+				'dependencies' => [],
 				'version'      => $this->get_file_version( $script_asset_path ),
-			);
+			];
 
 		wp_register_script(
 			'shipping-workshop-block-editor',
@@ -215,10 +215,10 @@ define( 'Shipping_Workshop_VERSION', '0.1.0' );
 		$script_asset_path = dirname( __FILE__ ) . '/build/shipping-workshop-block-frontend.asset.php';
 		$script_asset      = file_exists( $script_asset_path )
 			? require $script_asset_path
-			: array(
-				'dependencies' => array(),
+			: [
+				'dependencies' => [],
 				'version'      => $this->get_file_version( $script_asset_path ),
-			);
+			];
 
 		wp_register_script(
 			'shipping-workshop-block-frontend',
