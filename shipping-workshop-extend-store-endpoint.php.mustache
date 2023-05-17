@@ -23,7 +23,6 @@ class Shipping_Workshop_Extend_Store_Endpoint {
 
 	/**
 	 * Bootstraps the class and hooks required data.
-	 *
 	 */
 	public static function init() {
 		self::$extend = Automattic\WooCommerce\StoreApi\StoreApi::container()->get( Automattic\WooCommerce\StoreApi\Schemas\ExtendSchema::class );
@@ -41,7 +40,7 @@ class Shipping_Workshop_Extend_Store_Endpoint {
 		 *
 		 * Once complete you can uncomment the code below. See the `extend_checkout_schema` method stub for more hints!
 		 */
-        /*
+		/*
 		if ( is_callable( [ self::$extend, 'register_endpoint_data' ] ) ) {
 			self::$extend->register_endpoint_data(
 				[
@@ -52,7 +51,7 @@ class Shipping_Workshop_Extend_Store_Endpoint {
 				]
 			);
 		}
-        */
+		*/
 	}
 
 
@@ -60,19 +59,8 @@ class Shipping_Workshop_Extend_Store_Endpoint {
 	 * Register shipping workshop schema into the Checkout endpoint.
 	 *
 	 * @return array Registered schema.
-	 *
 	 */
 	public static function extend_checkout_schema() {
-        /**
-         * 📝Uncomment the code below and update the values in the array, following the instructions.
-         *
-         * We need to describe the shape of the data we're adding to the Checkout endpoint. Since we expect the shopper
-         * to supply an option from the select box and MAYBE enter text into the `other` field, we need to describe two things.
-         *
-         * This function should return an array. Since we're adding two keys on the client, this function should
-         * return an array with two keys. Each key describes the shape of the data for each field coming from the client.
-         *
-         */
 //		return [
 //			'otherShippingValue'   => [
 //				'description' => /** Enter a description */,
@@ -98,5 +86,14 @@ class Shipping_Workshop_Extend_Store_Endpoint {
 //				]
 //			],
 //		];
-    }
+		/**
+		 * 📝Uncomment the code below and update the values in the array, following the instructions.
+		 *
+		 * We need to describe the shape of the data we're adding to the Checkout endpoint. Since we expect the shopper
+		 * to supply an option from the select box and MAYBE enter text into the `other` field, we need to describe two things.
+		 *
+		 * This function should return an array. Since we're adding two keys on the client, this function should
+		 * return an array with two keys. Each key describes the shape of the data for each field coming from the client.
+		 */
+	}
 }
