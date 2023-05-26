@@ -1,7 +1,3 @@
-To get the validation error out of the `wc/store/validation` data store, we should use the `getValidationError` selector.
-
-The code to do that would look like this:
-
 ```js
 const validationError = useSelect( ( select ) => {
 	const store = select( 'wc/store/validation' );

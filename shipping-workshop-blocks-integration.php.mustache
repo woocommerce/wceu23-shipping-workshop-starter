@@ -1,7 +1,7 @@
 <?php
 use Automattic\WooCommerce\Blocks\Integrations\IntegrationInterface;
 
-define( 'Shipping_Workshop_VERSION', '0.1.0' );
+define( 'SHIPPING_WORKSHOP_VERSION', '0.1.0' );
 
 /**
  * Class for integrating with WooCommerce Blocks
@@ -29,6 +29,23 @@ define( 'Shipping_Workshop_VERSION', '0.1.0' );
 		$this->extend_store_api();
 		$this->save_shipping_instructions();
 		$this->show_address_in_order();
+		/**
+		 * 💰 Extra credit: Display the selection on the order confirmation page.
+		 * 
+		 * To accomplish this, you'll need to add an action to the `woocommerce_order_details_after_customer_details` hook. 
+		 * 
+		 * 🛟 If you get stuck, take a look in the spoilers folder.
+		 */
+		// $this->show_address_in_order_confirmation();
+		
+		/**
+		 * 💰 Extra credit: Display the selection in the order confirmation email.  
+		 * 
+		 * To accomplish this, you'll need to add an action to the `woocommerce_email_customer_details` hook. 
+		 * 
+		 * 🛟 If you get stuck, take a look in the spoilers folder.
+		 */
+		// $this->show_address_in_order_email();
 	}
 
 	/**
@@ -59,7 +76,7 @@ define( 'Shipping_Workshop_VERSION', '0.1.0' );
                  * Set the value of the `shipping_workshop_alternate_shipping_instruction` key to `$alternate_shipping_instruction`.
                  * Set the value of the `shipping_workshop_alternate_shipping_instruction_other_text` key to `$alternate_shipping_instruction_other_text`.
                  *
-                 * 💰Extra credit: Avoid setting `shipping_workshop_alternate_shipping_instruction_other_text` if
+                 * 💰 Extra credit: Avoid setting `shipping_workshop_alternate_shipping_instruction_other_text` if
                  * `$alternate_shipping_instruction_other_text` is not a string, or if it is empty.
                  */
 
@@ -76,7 +93,7 @@ define( 'Shipping_Workshop_VERSION', '0.1.0' );
      * Adds the address in the order page in WordPress admin.
      */
     private function show_address_in_order() {
-        add_action('woocommerce_admin_order_data_after_shipping_address', function( $order ) {
+        add_action('woocommerce_admin_order_data_after_shipping_address', function( \WC_Order $order ) {
             /**
              * 📝 Get the `shipping_workshop_alternate_shipping_instruction` from the order metadata using `$order->get_meta`.
              */
@@ -85,15 +102,32 @@ define( 'Shipping_Workshop_VERSION', '0.1.0' );
              * 📝 Get the `shipping_workshop_alternate_shipping_instruction_other_text` from the order metadata using `$order->get_meta`.
              */
 
-            echo '<div><strong>' . __( 'Shipping Instructions', 'shipping-workshop' ) . '</strong>';
-            /**
-             * Output the shipping instructions in the order admin by echoing them here.
+			/**
+			 * Output the shipping instructions in the order admin by echoing them here.
              *
-             * 💰Extra credit: Don't show the other value if the `shipping_workshop_alternate_shipping_instruction` is not `other`.
-             * 💰💰Extra extra credit: Figure out how to inject the selection into the order confirmation email too!
-             */
+			 * 💰 Extra credit: Don't show the other value if the `shipping_workshop_alternate_shipping_instruction` is not `other`.
+			 */
+			echo '<div><strong>' . __( 'Shipping Instructions', 'shipping-workshop' ) . '</strong>';
         } );
     }
+	
+	/**
+     * Adds the address on the order confirmation page.
+     */
+	private function show_address_in_order_confirmation() {
+		/**
+		 * Add your code here …
+		 */
+	}
+
+	/**
+	 * Adds the address on the order confirmation email.
+	 */
+	public function show_address_in_order_email() {
+		/**
+		 * Add your code here …
+		 */
+	}	
 
 	/**
 	 * Registers the main JS file required to add filters and Slot/Fills.
@@ -244,6 +278,6 @@ define( 'Shipping_Workshop_VERSION', '0.1.0' );
 		if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG && file_exists( $file ) ) {
 			return filemtime( $file );
 		}
-		return Shipping_Workshop_VERSION;
+		return SHIPPING_WORKSHOP_VERSION;
 	}
 }
