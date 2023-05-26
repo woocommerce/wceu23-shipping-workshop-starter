@@ -73,30 +73,33 @@ class Shipping_Workshop_Extend_Store_Endpoint {
          * return an array with two keys. Each key describes the shape of the data for each field coming from the client.
          *
          */
-//		return [
-//			'otherShippingValue'   => [
-//				'description' => /** Enter a description */,
-//				'type'        => /** Define the type */,
-//				'context'     => /** Define the contexts this should appear in This should be an array containing `view` and `edit` */,
-//				'readonly'    => /** Make this field readonly */,
-//				'optional'	  => /** Make this field optional */,
-//				'arg_options' => [
-//					'validate_callback' => function( $value ) {
-//						/** Make this function return true if $value is a string, or false otherwise. */
-//					},
-//				]
-//			],
-//			'alternateShippingInstruction'   => [
-//				'description' => /** Enter a description */,
-//				'type'        => /** Define the type */,
-//				'context'     => /** Define the contexts this should appear in This should be an array containing `view` and `edit` */,
-//				'readonly'    => /** Make this field readonly */,
-//				'arg_options' => [
-//					'validate_callback' => function( $value ) {
-//						/** Make this function return true if $value is a string, or false otherwise. */
-//					},
-//				]
-//			],
-//		];
+
+        /**
+        return [
+            'otherShippingValue'   => [
+                'description' => // Enter a description,
+                'type'        => // Define the type, this should be a `string`,
+                'context'     => // Define the contexts this should appear in This should be an array containing `view` and `edit`,
+                'readonly'    => // Using a boolean value, make this field readonly,
+                'optional'    => // Using a boolean value, make this field optional,
+                'arg_options' => [
+                    'validate_callback' => function( $value ) {
+                        // Make this function return true if $value is a string, or false otherwise.
+                    },
+                ]
+            ],
+            'alternateShippingInstruction'   => [
+            'description' => // Enter a description,
+                'type'        => // Define the type, this should be a `string`,
+                'context'     => // Define the contexts this should appear in This should be an array containing `view` and `edit`,
+                'readonly'    => // Using a boolean value, make this field readonly,
+                'arg_options' => [
+                    'validate_callback' => function( $value ) {
+                        // Make this function return true if $value is a string, or false otherwise.
+                    },
+                ]
+            ],
+        ];
+        */
     }
 }

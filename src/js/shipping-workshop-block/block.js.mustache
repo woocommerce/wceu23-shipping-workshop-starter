@@ -6,19 +6,11 @@ import { SelectControl, TextareaControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { useSelect, useDispatch } from '@wordpress/data';
 import { debounce } from 'lodash';
-import { getSetting } from '@woocommerce/settings';
-import { extensionCartUpdate } from '@woocommerce/blocks-checkout';
 
 /**
  * Internal dependencies
  */
 import { options } from './options';
-
-/**
- * 📝 Using `getSetting` from `@woocommerce/settings` get the 'shipping-workshop_data' key, and store the defaultLabelText in a variable.
- * Update the hardcoded label text with the defaultLabelText variable.
- */
-const shippingWorkshopSettings = getSetting( 'shipping-workshop_data', '' );
 
 export const Block = ( { checkoutExtensionData, extensions } ) => {
 	/**
@@ -93,7 +85,9 @@ export const Block = ( { checkoutExtensionData, extensions } ) => {
 		 * 📝 Write some code in this useEffect that will run when the `otherShippingValue` value changes.
 		 * This code should use `setExtensionData` to update the `otherShippingValue` key in the `shipping-workshop`
 		 * namespace of the checkout data store.
-		 *
+		 */
+
+		 /**
 		 * 💰 Extra credit: Ensure the `setExtensionData` function is not called multiple times. We can use the
 		 * `debouncedSetExtensionData` function for this. The API is the same.
 		 */
