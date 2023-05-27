@@ -1,9 +1,6 @@
 ```php
 public function show_address_in_order_email() {
-    add_action( 'woocommerce_email_after_order_table', function( $order, $sent_to_admin, $plain_text, $email ) {
-        /**
-        * 📝 Get the `shipping_workshop_alternate_shipping_instruction` from the order metadata using `$order->get_meta`.
-        */
+    add_action( 'woocommerce_email_after_order_table', function( \WC_Order $order, string $sent_to_admin, string $plain_text, string $email ) {
         $shipping_workshop_alternate_shipping_instruction = $order->get_meta( 'shipping_workshop_alternate_shipping_instruction' );
         $shipping_workshop_alternate_shipping_instruction_other_text = $order->get_meta( 'shipping_workshop_alternate_shipping_instruction_other_text' );
 
