@@ -31,18 +31,18 @@ define( 'SHIPPING_WORKSHOP_VERSION', '0.1.0' );
 		$this->show_address_in_order();
 		/**
 		 * 💰 Extra credit: Display the selection on the order confirmation page.
-		 * 
-		 * To accomplish this, you'll need to add an action to the `woocommerce_order_details_after_customer_details` hook. 
-		 * 
+		 *
+		 * To accomplish this, you'll need to add an action to the `woocommerce_order_details_after_customer_details` hook.
+		 *
 		 * 🛟 If you get stuck, take a look in the spoilers folder.
 		 */
 		// $this->show_address_in_order_confirmation();
-		
+
 		/**
-		 * 💰 Extra credit: Display the selection in the order confirmation email.  
-		 * 
-		 * To accomplish this, you'll need to add an action to the `woocommerce_email_customer_details` hook. 
-		 * 
+		 * 💰 Extra credit: Display the selection in the order confirmation email.
+		 *
+		 * To accomplish this, you'll need to add an action to the `woocommerce_email_customer_details` hook.
+		 *
 		 * 🛟 If you get stuck, take a look in the spoilers folder.
 		 */
 		// $this->show_address_in_order_email();
@@ -110,7 +110,7 @@ define( 'SHIPPING_WORKSHOP_VERSION', '0.1.0' );
 			echo '<div><strong>' . __( 'Shipping Instructions', 'shipping-workshop' ) . '</strong>';
         } );
     }
-	
+
 	/**
      * Adds the address on the order confirmation page.
      */
@@ -127,7 +127,7 @@ define( 'SHIPPING_WORKSHOP_VERSION', '0.1.0' );
 		/**
 		 * Add your code here …
 		 */
-	}	
+	}
 
 	/**
 	 * Registers the main JS file required to add filters and Slot/Fills.
@@ -196,11 +196,15 @@ define( 'SHIPPING_WORKSHOP_VERSION', '0.1.0' );
 			'shipping-workshop-active'    => true,
 
 			/**
-             * 📝 Add a key/value pair to the data array that will be available to the block on the client side.
+             * 💰Extra credit: Add a key/value pair to the data array that will be available to the block on the client side.
              * It should be called defaultLabelText and the value should be the default text to display above the label
+             * in the editor.
+             *
+             * To test if this is working, go to the editor, remove and re-add the Checkout block and see the label text
+             * above the alternative shipping options select box.
              */
 		];
-
+💰
 		return $data;
 
 	}

@@ -30,9 +30,16 @@ export const Edit = ( { attributes, setAttributes } ) => {
 			</InspectorControls>
 			<div>
 				<RichText
-					value={ text || defaultShippingText }
-					onChange={ ( value ) => setAttributes( { text: value } ) }
-				/>
+                    value={
+                        text ||
+                        defaultShippingText ||
+                        __(
+                            'If I am not at home, please…',
+                            'shipping-workshop'
+                        )
+                    }
+                    onChange={ ( value ) => setAttributes( { text: value } ) }
+                />
 			</div>
 			<div>
 				<Disabled>
