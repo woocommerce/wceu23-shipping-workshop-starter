@@ -26,7 +26,7 @@ use Automattic\WooCommerce\Blocks\Integrations\IntegrationInterface;
 		$this->register_main_integration();
 		$this->extend_store_api();
 		$this->save_shipping_instructions();
-		$this->show_address_in_order();
+		$this->show_shipping_instructions_in_order();
 		/**
 		 * 💰 Extra credit: Display the selection on the order confirmation page.
 		 *
@@ -34,7 +34,7 @@ use Automattic\WooCommerce\Blocks\Integrations\IntegrationInterface;
 		 *
 		 * 🛟 If you get stuck, take a look in the spoilers folder.
 		 */
-		// $this->show_address_in_order_confirmation();
+		// $this->show_shipping_instructions_in_order_confirmation();
 
 		/**
 		 * 💰 Extra credit: Display the selection in the order confirmation email.
@@ -43,7 +43,7 @@ use Automattic\WooCommerce\Blocks\Integrations\IntegrationInterface;
 		 *
 		 * 🛟 If you get stuck, take a look in the spoilers folder.
 		 */
-		// $this->show_address_in_order_email();
+		// $this->show_shipping_instructions_in_order_email();
 	}
 
 	/**
@@ -66,14 +66,16 @@ use Automattic\WooCommerce\Blocks\Integrations\IntegrationInterface;
                 $shipping_workshop_request_data = $request['extensions'][$this->get_name()];
                 /**
                  * 📝From the `$shipping_workshop_request_data` array, get the `alternateShippingInstruction` and
-                 * `otherShippingValue` entries. Store them in their own variables.
+                 * `otherShippingValue` entries. Store them in their own variables, $alternate_shipping_instruction and $other_shipping_value.
                  */
 
                 /**
                  * 📝Using `$order->update_meta_data` update the order metadata.
                  * Set the value of the `shipping_workshop_alternate_shipping_instruction` key to `$alternate_shipping_instruction`.
-                 * Set the value of the `shipping_workshop_alternate_shipping_instruction_other_text` key to `$alternate_shipping_instruction_other_text`.
-                 *
+                 * Set the value of the `shipping_workshop_alternate_shipping_instruction_other_text` key to `$other_shipping_value`.
+                 */
+
+                /**
                  * 💰 Extra credit: Avoid setting `shipping_workshop_alternate_shipping_instruction_other_text` if
                  * `$alternate_shipping_instruction_other_text` is not a string, or if it is empty.
                  */
@@ -90,7 +92,7 @@ use Automattic\WooCommerce\Blocks\Integrations\IntegrationInterface;
     /**
      * Adds the address in the order page in WordPress admin.
      */
-    private function show_address_in_order() {
+    private function show_shipping_instructions_in_order() {
         add_action('woocommerce_admin_order_data_after_shipping_address', function( \WC_Order $order ) {
             /**
              * 📝 Get the `shipping_workshop_alternate_shipping_instruction` from the order metadata using `$order->get_meta`.
@@ -112,7 +114,7 @@ use Automattic\WooCommerce\Blocks\Integrations\IntegrationInterface;
 	/**
      * Adds the address on the order confirmation page.
      */
-	private function show_address_in_order_confirmation() {
+	private function show_shipping_instructions_in_order_confirmation() {
 		/**
 		 * Add your code here …
 		 */
@@ -121,7 +123,7 @@ use Automattic\WooCommerce\Blocks\Integrations\IntegrationInterface;
 	/**
 	 * Adds the address on the order confirmation email.
 	 */
-	public function show_address_in_order_email() {
+	public function show_shipping_instructions_in_order_email() {
 		/**
 		 * Add your code here …
 		 */
