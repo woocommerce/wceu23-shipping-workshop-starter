@@ -93,22 +93,28 @@ use Automattic\WooCommerce\Blocks\Integrations\IntegrationInterface;
      * Adds the address in the order page in WordPress admin.
      */
     private function show_shipping_instructions_in_order() {
-        add_action('woocommerce_admin_order_data_after_shipping_address', function( \WC_Order $order ) {
-            /**
-             * 📝 Get the `shipping_workshop_alternate_shipping_instruction` from the order metadata using `$order->get_meta`.
-             */
+        add_action(
+            'woocommerce_admin_order_data_after_shipping_address',
+            function( \WC_Order $order ) {
+                /**
+                 * 📝 Get the `shipping_workshop_alternate_shipping_instruction` from the order metadata using `$order->get_meta`.
+                 */
 
-            /**
-             * 📝 Get the `shipping_workshop_alternate_shipping_instruction_other_text` from the order metadata using `$order->get_meta`.
-             */
+                /**
+                 * 📝 Get the `shipping_workshop_alternate_shipping_instruction_other_text` from the order metadata using `$order->get_meta`.
+                 */
 
-			/**
-			 * Output the shipping instructions in the order admin by echoing them here.
-             *
-			 * 💰 Extra credit: Don't show the other value if the `shipping_workshop_alternate_shipping_instruction` is not `other`.
-			 */
-			echo '<div><strong>' . __( 'Shipping Instructions', 'shipping-workshop' ) . '</strong>';
-        } );
+                /**
+                 * Output the shipping instructions in the order admin by echoing them here.
+                 *
+                 * 💰 Extra credit: Don't show the other value if the `shipping_workshop_alternate_shipping_instruction` is not `other`.
+                 */
+                echo '<div>';
+                echo '<strong>' . __( 'Shipping Instructions', 'shipping-workshop' ) . '</strong>';
+                /** 📝 Output the alternate shipping instructions here! */
+                echo '</div>';
+            }
+        );
     }
 
 	/**
