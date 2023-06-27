@@ -1,6 +1,6 @@
 ⚠️ Please note: This repository contains only _template_ files for the workshop. To use it you must use the `@wordpress/create-block` tool to create a WordPress plugin.
 
-To do so, open you `wp-content/plugins` directory and run the command:
+To do so, open your `wp-content/plugins` directory and run the following command:
 
 `npx @wordpress/create-block -t wceu23-shipping-workshop shipping-workshop`
 
