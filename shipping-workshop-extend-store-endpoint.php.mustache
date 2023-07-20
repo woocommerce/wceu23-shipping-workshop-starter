@@ -35,11 +35,9 @@ class Shipping_Workshop_Extend_Store_Endpoint {
 	 */
 	public static function extend_store() {
 		/**
-		 * 📝 Find the `extend_checkout_schema` method in this class and make some changes.
-		 *
-		 * This method should describe how the custom data will be formatted when submitting the checkout form.
-		 *
-		 * Once complete you can uncomment the code below. See the `extend_checkout_schema` method stub for more hints!
+		 * [backend-step-02]
+		 * 📝 Once the `extend_checkout_schema` method is complete (see [backend-step-01]) you can 
+		 * uncomment the code below.
 		 */
         /*
 		if ( is_callable( [ self::$extend, 'register_endpoint_data' ] ) ) {
@@ -64,7 +62,8 @@ class Shipping_Workshop_Extend_Store_Endpoint {
 	 */
 	public static function extend_checkout_schema() {
         /**
-         * 📝Uncomment the code below and update the values in the array, following the instructions.
+         * [backend-step-01]
+		 * 📝 Uncomment the code below and update the values in the array, following the instructions.
          *
          * We need to describe the shape of the data we're adding to the Checkout endpoint. Since we expect the shopper
          * to supply an option from the select box and MAYBE enter text into the `other` field, we need to describe two things.

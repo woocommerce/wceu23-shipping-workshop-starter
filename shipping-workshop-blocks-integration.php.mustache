@@ -28,20 +28,30 @@ use Automattic\WooCommerce\Blocks\Integrations\IntegrationInterface;
 		$this->save_shipping_instructions();
 		$this->show_shipping_instructions_in_order();
 		/**
+		 * [backend-step-09-extra-credit]
 		 * 💰 Extra credit: Display the selection on the order confirmation page.
 		 *
-		 * To accomplish this, you'll need to add an action to the `woocommerce_order_details_after_customer_details` hook.
-		 *
-		 * 🛟 If you get stuck, take a look in the spoilers folder.
+		 * To accomplish this, you'll need to add an action to the 
+		 * `woocommerce_order_details_after_customer_details` hook. Uncomment the function call in 
+		 * the next line, and implement the function body of `show_shipping_instructions_in_order_confirmation`.
+		 * 
+		 * 💡 Similar to [backend-step-08] respectively [backend-step-08-extra-credit], you'll need 
+		 * to get the `shipping_workshop_alternate_shipping_instruction` and 
+		 * `shipping_workshop_alternate_shipping_instruction_other_text` and print them out.
 		 */
 		// $this->show_shipping_instructions_in_order_confirmation();
 
 		/**
+		 * [backend-step-10-extra-credit]
 		 * 💰 Extra credit: Display the selection in the order confirmation email.
 		 *
-		 * To accomplish this, you'll need to add an action to the `woocommerce_email_customer_details` hook.
-		 *
-		 * 🛟 If you get stuck, take a look in the spoilers folder.
+		 * To accomplish this, you'll need to add an action to the 
+		 * `woocommerce_email_customer_details` hook. Uncomment the function call in 
+		 * the next line, and implement the function body of `show_shipping_instructions_in_order_email`.
+		 * 
+		 * 💡 Similar to [backend-step-08] respectively [backend-step-08-extra-credit], you'll need 
+		 * to get the `shipping_workshop_alternate_shipping_instruction` and 
+		 * `shipping_workshop_alternate_shipping_instruction_other_text` and print them out.
 		 */
 		// $this->show_shipping_instructions_in_order_email();
 	}
@@ -55,8 +65,8 @@ use Automattic\WooCommerce\Blocks\Integrations\IntegrationInterface;
 
     private function save_shipping_instructions() {
         /**
-         * 📝 Write a hook, using the `woocommerce_store_api_checkout_update_order_from_request` action
-         * that will update the order metadata with the shipping-workshop alternate shipping instruction.
+         * Complete the below `woocommerce_store_api_checkout_update_order_from_request` action.
+		 * This will update the order metadata with the shipping-workshop alternate shipping instruction.
          *
          * The documentation for this hook is at: https://github.com/woocommerce/woocommerce-blocks/blob/b73fbcacb68cabfafd7c3e7557cf962483451dc1/docs/third-party-developers/extensibility/hooks/actions.md#woocommerce_store_api_checkout_update_order_from_request
          */
@@ -65,24 +75,38 @@ use Automattic\WooCommerce\Blocks\Integrations\IntegrationInterface;
             function( \WC_Order $order, \WP_REST_Request $request ) {
                 $shipping_workshop_request_data = $request['extensions'][$this->get_name()];
                 /**
-                 * 📝From the `$shipping_workshop_request_data` array, get the `alternateShippingInstruction` and
-                 * `otherShippingValue` entries. Store them in their own variables, $alternate_shipping_instruction and $other_shipping_value.
+				 * [backend-step-03]
+                 * 📝 From the `$shipping_workshop_request_data` array, get the 
+				 * `alternateShippingInstruction` and `otherShippingValue` entries. Store them in 
+				 * their own variables, $alternate_shipping_instruction and $other_shipping_value.
+                 */
+				
+				/**
+				 * [backend-step-04]
+                 * 📝 Using `$order->update_meta_data` update the order metadata.
+                 * Set the value of the `shipping_workshop_alternate_shipping_instruction` key to 
+				 * `$alternate_shipping_instruction`.
+				 * Set the value of the `shipping_workshop_alternate_shipping_instruction_other_text` 
+				 * key to `$other_shipping_value`.
+				 
+                 */
+				
+				/**
+                 * [backend-step-04-extra-credit-1]
+				 * 💰 Extra credit: Instead of the `shipping_workshop_alternate_shipping_instruction`
+				 * key, show the translation-ready value.
                  */
 
-                /**
-                 * 📝Using `$order->update_meta_data` update the order metadata.
-                 * Set the value of the `shipping_workshop_alternate_shipping_instruction` key to `$alternate_shipping_instruction`.
-                 * Set the value of the `shipping_workshop_alternate_shipping_instruction_other_text` key to `$other_shipping_value`.
-                 */
-
-                /**
-                 * 💰 Extra credit: Avoid setting `shipping_workshop_alternate_shipping_instruction_other_text` if
+				/**
+                 * [backend-step-04-extra-credit-2]
+				 * 💰 Extra credit: Avoid setting `shipping_workshop_alternate_shipping_instruction_other_text` if
                  * `$alternate_shipping_instruction_other_text` is not a string, or if it is empty.
                  */
-
-                /**
-                 * 💡Don't forget to save the order using `$order->save()`.
-                 */
+				
+				 /**
+				  * [backend-step-05]
+				  * 💡 Don't forget to save the order using `$order->save()`.
+				  */
             },
             10,
             2
@@ -97,21 +121,28 @@ use Automattic\WooCommerce\Blocks\Integrations\IntegrationInterface;
             'woocommerce_admin_order_data_after_shipping_address',
             function( \WC_Order $order ) {
                 /**
-                 * 📝 Get the `shipping_workshop_alternate_shipping_instruction` from the order metadata using `$order->get_meta`.
+                 * [backend-step-06]
+				 * 📝 Get the `shipping_workshop_alternate_shipping_instruction` from the order metadata using `$order->get_meta`.
                  */
 
                 /**
+				 * [backend-step-07]
                  * 📝 Get the `shipping_workshop_alternate_shipping_instruction_other_text` from the order metadata using `$order->get_meta`.
                  */
 
-                /**
-                 * Output the shipping instructions in the order admin by echoing them here.
-                 *
-                 * 💰 Extra credit: Don't show the other value if the `shipping_workshop_alternate_shipping_instruction` is not `other`.
-                 */
-                echo '<div>';
+				echo '<div>';
                 echo '<strong>' . __( 'Shipping Instructions', 'shipping-workshop' ) . '</strong>';
-                /** 📝 Output the alternate shipping instructions here! */
+                /**
+				 * [backend-step-08] 
+				 * 📝 Output the alternate shipping instructions here!
+				 */
+
+				 /**
+				 * [backend-step-08-extra-credit]
+				 * 💰 Extra credit: Don't show the other value if the `shipping_workshop_alternate_shipping_instruction` is not `other`.
+				 * 
+				 * Output the shipping instructions in the order admin by echoing them here.
+				 */
                 echo '</div>';
             }
         );
@@ -122,6 +153,7 @@ use Automattic\WooCommerce\Blocks\Integrations\IntegrationInterface;
      */
 	private function show_shipping_instructions_in_order_confirmation() {
 		/**
+		 * [backend-step-09-extra-credit]
 		 * Add your code here …
 		 */
 	}
@@ -131,6 +163,7 @@ use Automattic\WooCommerce\Blocks\Integrations\IntegrationInterface;
 	 */
 	public function show_shipping_instructions_in_order_email() {
 		/**
+		 * [backend-step-10-extra-credit]
 		 * Add your code here …
 		 */
 	}
@@ -199,16 +232,7 @@ use Automattic\WooCommerce\Blocks\Integrations\IntegrationInterface;
 	 */
 	public function get_script_data() {
 		$data = [
-			'shipping-workshop-active'    => true,
-
-			/**
-             * 💰Extra credit: Add a key/value pair to the data array that will be available to the block on the client side.
-             * It should be called defaultLabelText and the value should be the default text to display above the label
-             * in the editor.
-             *
-             * To test if this is working, go to the editor, remove and re-add the Checkout block and see the label text
-             * above the alternative shipping options select box.
-             */
+			'shipping-workshop-active' => true,
 		];
 
 		return $data;
