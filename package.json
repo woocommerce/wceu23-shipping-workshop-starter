@@ -1,6 +1,6 @@
 {
 	"name": "wceu23-shipping-workshop",
-	"version": "0.1.14",
+	"version": "0.1.15",
 	"author": "Thomas Roberts and Niels Lange",
 	"license": "GPL-2.0-or-later",
 	"main": "index.js",
