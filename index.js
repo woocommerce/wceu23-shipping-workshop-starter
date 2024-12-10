@@ -6,7 +6,7 @@ module.exports = {
 		dashicon: 'palmtree',
 		version: '1.0.0',
 		npmDependencies: [
-			"@wordpress/icons@^9.22.0",
+			"@wordpress/icons@^10.13.0",
 			"lodash@^4.17.21",
 		],
 		customScripts: {
