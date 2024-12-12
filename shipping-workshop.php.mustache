@@ -17,7 +17,7 @@ defined( 'ABSPATH' ) || exit;
 add_action( 'plugin_row_meta', 'wceu23_shipping_workshop_add_plugin_links', 10, 2 );
 function wceu23_shipping_workshop_add_plugin_links( $links, $file ) {
 	if ( basename( dirname(__FILE__ ) ) . '/' . basename( __FILE__ ) !== $file ) {
-		return;
+		return $links;
 	}
 	$links[] = '<a href="https://github.com/woocommerce/wceu23-shipping-workshop-starter">' . __( 'Workshop starter files', 'shipping-workshop' ) . '</a>';
 	$links[] = '<a href="https://github.com/woocommerce/wceu23-shipping-workshop-final">' . __( 'Workshop final files', 'shipping-workshop' ) . '</a>';
