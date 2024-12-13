@@ -6,12 +6,24 @@
  * License:         GPL-2.0-or-later
  * License URI:     https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:     shipping-workshop
+ * Description:     A tutorial plugin to extend the Checkout block by adding a "not at home" shipping option.
  *
  * @package         create-block
  */
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
+
+add_action( 'plugin_row_meta', 'wceu23_shipping_workshop_add_plugin_links', 10, 2 );
+function wceu23_shipping_workshop_add_plugin_links( $links, $file ) {
+	if ( basename( dirname(__FILE__ ) ) . '/' . basename( __FILE__ ) !== $file ) {
+		return $links;
+	}
+	$links[] = '<a href="https://github.com/woocommerce/wceu23-shipping-workshop-starter">' . __( 'Workshop starter files', 'shipping-workshop' ) . '</a>';
+	$links[] = '<a href="https://github.com/woocommerce/wceu23-shipping-workshop-final">' . __( 'Workshop final files', 'shipping-workshop' ) . '</a>';
+	$links[] = '<a href="https://developer.woocommerce.com/2023/08/07/extending-the-woocommerce-checkout-block-to-add-custom-shipping-options/">' . __( 'Video tutorial', 'shipping-workshop' ) . '</a>';
+	return $links;
+}
 
 // Define SHIPPING_WORKSHOP_VERSION.
 $plugin_data = get_file_data( __FILE__, array( 'version' => 'version' ) );
